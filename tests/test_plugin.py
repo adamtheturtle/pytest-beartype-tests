@@ -2,7 +2,6 @@
 
 import pytest
 
-
 _COUNTING_CONFTEST = """
 from beartype import beartype as _real_beartype
 import pytest
