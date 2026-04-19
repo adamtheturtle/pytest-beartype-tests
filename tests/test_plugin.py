@@ -2,7 +2,6 @@
 
 import pytest
 
-
 _COUNTING_CONFTEST = """
 from beartype import beartype as _real_beartype
 import pytest
@@ -26,7 +25,7 @@ def beartype_call_count() -> dict:
 
 def test_type_correct_test_passes(pytester: pytest.Pytester) -> None:
     """A test whose values match their annotations runs normally."""
-    _ = pytester.makepyfile(
+    _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
         """
         def test_ok() -> None:
             x: int = 1
@@ -41,7 +40,7 @@ def test_argument_violating_annotation_fails(
     pytester: pytest.Pytester,
 ) -> None:
     """Parametrized values that violate a type annotation fail."""
-    _ = pytester.makepyfile(
+    _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
         """
         import pytest
 
@@ -58,7 +57,7 @@ def test_class_based_test_is_type_checked(
     pytester: pytest.Pytester,
 ) -> None:
     """Methods on test classes are also wrapped with beartype."""
-    _ = pytester.makepyfile(
+    _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
         """
         import pytest
 
@@ -77,7 +76,7 @@ def test_wrapper_cached_across_parametrized_items(
 ) -> None:
     """Parametrized items share a single beartype wrapper."""
     _ = pytester.makeconftest(_COUNTING_CONFTEST)
-    _ = pytester.makepyfile(
+    _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
         """
         import pytest
 
@@ -95,7 +94,7 @@ def test_each_distinct_function_is_wrapped_once(
 ) -> None:
     """Distinct test functions each get their own beartype call."""
     _ = pytester.makeconftest(_COUNTING_CONFTEST)
-    _ = pytester.makepyfile(
+    _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
         """
         def test_one(beartype_call_count: dict) -> None:
             assert beartype_call_count["n"] == 2
@@ -112,7 +111,7 @@ def test_same_named_methods_in_different_classes_keep_own_types(
     pytester: pytest.Pytester,
 ) -> None:
     """Same-named methods in different classes get class-specific wrappers."""
-    _ = pytester.makepyfile(
+    _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
         """
         import pytest
 
@@ -133,7 +132,7 @@ def test_same_named_methods_in_different_classes_keep_own_types(
 
 def test_return_annotation_is_enforced(pytester: pytest.Pytester) -> None:
     """A test returning a value that violates its return annotation fails."""
-    _ = pytester.makepyfile(
+    _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
         """
         def test_bad_return() -> None:
             return "not None"  # type: ignore[return-value]
