@@ -1,1 +1,1 @@
-"""Pytest plugin that applies ``@beartype`` to every collected test function."""
+"""Apply ``@beartype`` to every collected pytest test function."""
