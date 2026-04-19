@@ -1,0 +1,51 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = [
+    "setuptools",
+    "setuptools-scm>=8.1.0",
+]
+
+[project]
+name = "pytest-beartype-tests"
+description = "Pytest plugin that applies @beartype to every collected test function."
+readme = { file = "README.md", content-type = "text/markdown" }
+keywords = [
+    "beartype",
+    "pytest",
+    "type-checking",
+]
+license = { file = "LICENSE" }
+authors = [
+    { name = "Adam Dangoor", email = "adamdangoor@gmail.com" },
+]
+requires-python = ">=3.11"
+classifiers = [
+    "Framework :: Pytest",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
+dynamic = [
+    "version",
+]
+dependencies = [
+    "beartype>=0.18",
+    "pytest>=8",
+]
+urls.Source = "https://github.com/adamtheturtle/pytest-beartype-tests"
+entry-points.pytest11.pytest_beartype_tests = "pytest_beartype_tests.plugin"
+
+[tool.setuptools]
+zip-safe = false
+package-data.pytest_beartype_tests = [
+    "py.typed",
+]
+packages.find.where = [
+    "src",
+]
+
+[tool.setuptools_scm]
+version_scheme = "post-release"
