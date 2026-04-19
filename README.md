@@ -4,6 +4,8 @@ A tiny pytest plugin that applies [`beartype`](https://github.com/beartype/beart
 
 This is distinct from [`pytest-beartype`](https://pypi.org/project/pytest-beartype/), which beartypes your *source* packages. This plugin beartypes the *tests themselves*.
 
+> **Note:** This plugin is a temporary workaround until [`pytest-beartype`](https://pypi.org/project/pytest-beartype/) 0.3.0 is released, which is expected to provide this functionality natively (see https://github.com/beartype/pytest-beartype/issues/22). Once that release is available, you can migrate off this plugin.
+
 ## Install
 
 ```sh
