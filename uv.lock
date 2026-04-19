@@ -603,6 +603,19 @@ wheels = [
 ]
 
 [[package]]
+name = "mypy-strict-kwargs"
+version = "2026.1.12"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "mypy" },
+    { name = "tomli" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/8c/77/869682567b0953f3f9ea6b44639a2a520e0976679a93e4fd4a91840ac43a/mypy_strict_kwargs-2026.1.12.tar.gz", hash = "sha256:abc688be88661e14f19626e00686f42cc6ce3a959e9cd86e0523dee2b5509cac", size = 18756, upload-time = "2026-01-12T06:12:03.509Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/af/93/918273959da1d3364478742f45e5579489acd100a6184061f57d64b37be7/mypy_strict_kwargs-2026.1.12-py2.py3-none-any.whl", hash = "sha256:54529ed7d9912be26f4aedb200e5c4d577fb592398c4038b551a3a07ea83361d", size = 7095, upload-time = "2026-01-12T06:12:01.884Z" },
+]
+
+[[package]]
 name = "nodeenv"
 version = "1.10.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1013,6 +1026,7 @@ dev = [
     { name = "deptry" },
     { name = "interrogate" },
     { name = "mypy", extra = ["faster-cache"] },
+    { name = "mypy-strict-kwargs" },
     { name = "prek" },
     { name = "pylint" },
     { name = "pylint-per-file-ignores" },
@@ -1038,6 +1052,7 @@ requires-dist = [
     { name = "deptry", marker = "extra == 'dev'", specifier = "==0.25.1" },
     { name = "interrogate", marker = "extra == 'dev'", specifier = "==1.7.0" },
     { name = "mypy", extras = ["faster-cache"], marker = "extra == 'dev'", specifier = "==1.20.1" },
+    { name = "mypy-strict-kwargs", marker = "extra == 'dev'", specifier = "==2026.1.12" },
     { name = "prek", marker = "extra == 'dev'", specifier = "==0.3.9" },
     { name = "pylint", marker = "extra == 'dev'", specifier = "==4.0.5" },
     { name = "pylint-per-file-ignores", marker = "extra == 'dev'", specifier = "==3.2.1" },

@@ -42,6 +42,7 @@ optional-dependencies.dev = [
     "deptry==0.25.1",
     "interrogate==1.7.0",
     "mypy[faster-cache]==1.20.1",
+    "mypy-strict-kwargs==2026.1.12",
     "prek==0.3.9",
     "pylint==4.0.5",
     "pylint-per-file-ignores==3.2.1",
@@ -180,6 +181,7 @@ strict = true
 files = [ "." ]
 exclude = [ "build" ]
 follow_untyped_imports = true
+plugins = [ "mypy_strict_kwargs" ]
 
 [tool.pyrefly]
 errors.non-exhaustive-match = "error"
