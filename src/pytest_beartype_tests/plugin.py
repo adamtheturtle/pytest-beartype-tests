@@ -1,10 +1,16 @@
 """Pytest hook implementation."""
 
-from collections.abc import Callable
-from types import ModuleType
+from __future__ import annotations
 
-import pytest
+from typing import TYPE_CHECKING
+
 from beartype import beartype
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
+    from types import ModuleType
+
+    import pytest
 
 
 def pytest_collection_modifyitems(items: list[pytest.Function]) -> None:

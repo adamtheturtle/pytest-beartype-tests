@@ -8,7 +8,7 @@ requires = [
 [project]
 name = "pytest-beartype-tests"
 description = "Pytest plugin that applies @beartype to every collected test function."
-readme = { file = "README.md", content-type = "text/markdown" }
+readme = { file = "README.rst", content-type = "text/x-rst" }
 keywords = [
     "beartype",
     "pytest",
@@ -20,6 +20,7 @@ authors = [
 ]
 requires-python = ">=3.11"
 classifiers = [
+    "Development Status :: 4 - Beta",
     "Framework :: Pytest",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3 :: Only",
@@ -35,6 +36,30 @@ dependencies = [
     "beartype>=0.18",
     "pytest>=8",
 ]
+optional-dependencies.dev = [
+    "actionlint-py==1.7.10.24",
+    "check-manifest==0.51",
+    "deptry==0.25.1",
+    "interrogate==1.7.0",
+    "mypy[faster-cache]==1.19.1",
+    "prek==0.3.9",
+    "pylint==4.0.5",
+    "pylint-per-file-ignores==3.2.1",
+    "pyproject-fmt==2.20.0",
+    "pyrefly==0.58.0",
+    "pyright==1.1.408",
+    "pyroma==5.0.1",
+    "ruff==0.15.8",
+    # We add shellcheck-py not only for shell scripts and shell code blocks,
+    # but also because having it installed means that ``actionlint-py`` will
+    # use it to lint shell commands in GitHub workflow files.
+    "shellcheck-py==0.11.0.1",
+    "shfmt-py==3.12.0.2",
+    "ty==0.0.31",
+    "vulture==2.16",
+    "yamlfix==1.19.1",
+    "zizmor==1.23.1",
+]
 urls.Source = "https://github.com/adamtheturtle/pytest-beartype-tests"
 entry-points.pytest11.pytest_beartype_tests = "pytest_beartype_tests.plugin"
 
@@ -49,3 +74,146 @@ packages.find.where = [
 
 [tool.setuptools_scm]
 version_scheme = "post-release"
+
+[tool.ruff]
+line-length = 79
+lint.select = [
+    "ALL",
+]
+lint.ignore = [
+    # Ruff warns that this conflicts with the formatter.
+    "COM812",
+    # Ruff warns that this conflicts with the formatter.
+    "ISC001",
+    # Ignore 'too-many-*' errors as they seem to get in the way more than
+    # helping.
+    "PLR0913",
+]
+# Do not automatically remove commented out code.
+# We comment out code during development, and with VSCode auto-save, this code
+# is sometimes annoyingly removed.
+lint.unfixable = [
+    "ERA001",
+]
+lint.pydocstyle.convention = "google"
+
+[tool.pylint]
+FORMAT.single-line-if-stmt = false
+MASTER.persistent = true
+MASTER.jobs = 0
+MASTER.load-plugins = [
+    "pylint_per_file_ignores",
+    "pylint.extensions.bad_builtin",
+    "pylint.extensions.comparison_placement",
+    "pylint.extensions.consider_refactoring_into_while_condition",
+    "pylint.extensions.docparams",
+    "pylint.extensions.dunder",
+    "pylint.extensions.eq_without_hash",
+    "pylint.extensions.for_any_all",
+    "pylint.extensions.mccabe",
+    "pylint.extensions.no_self_use",
+    "pylint.extensions.overlapping_exceptions",
+    "pylint.extensions.private_import",
+    "pylint.extensions.redefined_loop_name",
+    "pylint.extensions.redefined_variable_type",
+    "pylint.extensions.set_membership",
+    "pylint.extensions.typing",
+]
+MASTER.unsafe-load-any-extension = false
+"MESSAGES CONTROL".enable = [
+    "bad-inline-option",
+    "deprecated-pragma",
+    "file-ignored",
+    "use-symbolic-message-instead",
+    "useless-suppression",
+]
+"MESSAGES CONTROL".disable = [
+    "too-few-public-methods",
+    "too-many-locals",
+    "too-many-arguments",
+    "too-many-instance-attributes",
+    "too-many-return-statements",
+    "too-many-lines",
+    "locally-disabled",
+    # Let ruff handle long lines
+    "line-too-long",
+    # Let ruff handle unused imports
+    "unused-import",
+    # Let ruff deal with sorting
+    "ungrouped-imports",
+    # We don't need everything to be documented because of mypy
+    "missing-type-doc",
+    "missing-return-type-doc",
+    # Too difficult to please
+    "duplicate-code",
+    # Let ruff handle imports
+    "wrong-import-order",
+    # mypy does not want untyped parameters.
+    "useless-type-doc",
+]
+
+[tool.check-manifest]
+ignore = [
+    ".pre-commit-config.yaml",
+    "LICENSE",
+    "uv.lock",
+    "zizmor.yml",
+]
+
+[tool.deptry]
+pep621_dev_dependency_groups = [
+    "dev",
+]
+# pytest is required at runtime: it loads our plugin via the ``pytest11``
+# entry point. The ``import pytest`` statement is only needed for typing.
+per_rule_ignores.DEP002 = [ "pytest" ]
+
+[tool.pyproject-fmt]
+indent = 4
+keep_full_version = true
+max_supported_python = "3.14"
+
+[tool.mypy]
+strict = true
+files = [ "." ]
+exclude = [ "build" ]
+follow_untyped_imports = true
+
+[tool.pyrefly]
+errors.non-exhaustive-match = "error"
+
+[tool.pyright]
+reportUnnecessaryTypeIgnoreComment = true
+enableTypeIgnoreComments = false
+typeCheckingMode = "strict"
+
+[tool.ty]
+analysis.respect-type-ignore-comments = false
+terminal.error-on-warning = true
+
+[tool.pytest]
+xfail_strict = true
+log_cli = true
+
+[tool.coverage]
+run.branch = true
+report.exclude_also = [
+    "if TYPE_CHECKING:",
+]
+report.show_missing = true
+
+[tool.interrogate]
+fail-under = 100
+omit-covered-files = true
+verbose = 2
+
+[tool.vulture]
+exclude = [ ".venv" ]
+ignore_names = [
+    # pytest plugin hook implementation.
+    "pytest_collection_modifyitems",
+]
+
+[tool.yamlfix]
+section_whitelines = 1
+whitelines = 1
