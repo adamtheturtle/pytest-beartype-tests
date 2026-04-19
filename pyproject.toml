@@ -62,6 +62,9 @@ optional-dependencies.dev = [
     "yamlfix==1.19.1",
     "zizmor==1.24.1",
 ]
+optional-dependencies.release = [
+    "check-wheel-contents==0.6.3",
+]
 urls.Source = "https://github.com/adamtheturtle/pytest-beartype-tests"
 entry-points.pytest11.pytest_beartype_tests = "pytest_beartype_tests.plugin"
 
