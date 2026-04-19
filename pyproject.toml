@@ -41,7 +41,7 @@ optional-dependencies.dev = [
     "check-manifest==0.51",
     "deptry==0.25.1",
     "interrogate==1.7.0",
-    "mypy[faster-cache]==1.19.1",
+    "mypy[faster-cache]==1.20.1",
     "prek==0.3.9",
     "pylint==4.0.5",
     "pylint-per-file-ignores==3.2.1",
