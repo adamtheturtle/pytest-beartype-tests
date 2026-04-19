@@ -8,7 +8,7 @@ requires = [
 [project]
 name = "pytest-beartype-tests"
 description = "Pytest plugin that applies @beartype to every collected test function."
-readme = { file = "README.md", content-type = "text/markdown" }
+readme = { file = "README.rst", content-type = "text/x-rst" }
 keywords = [
     "beartype",
     "pytest",
