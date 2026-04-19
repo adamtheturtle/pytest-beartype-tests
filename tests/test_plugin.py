@@ -78,7 +78,7 @@ def test_wrapper_cached_across_parametrized_items(
     pytester: pytest.Pytester,
 ) -> None:
     """Parametrized items share a single beartype wrapper."""
-    _ = pytester.makeconftest(_COUNTING_CONFTEST)
+    _ = pytester.makeconftest(source=_COUNTING_CONFTEST)
     # https://github.com/pytest-dev/pytest/pull/14080
     _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
         """
@@ -97,7 +97,7 @@ def test_each_distinct_function_is_wrapped_once(
     pytester: pytest.Pytester,
 ) -> None:
     """Distinct test functions each get their own beartype call."""
-    _ = pytester.makeconftest(_COUNTING_CONFTEST)
+    _ = pytester.makeconftest(source=_COUNTING_CONFTEST)
     # https://github.com/pytest-dev/pytest/pull/14080
     _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
         """
