@@ -32,8 +32,3 @@ Equivalent to writing this hook in your ``conftest.py``:
    def pytest_collection_modifyitems(items: list[pytest.Function]) -> None:
        for item in items:
            item.obj = beartype(obj=item.obj)
-
-License
--------
-
-MIT
