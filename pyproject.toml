@@ -191,9 +191,9 @@ typeCheckingMode = "strict"
 analysis.respect-type-ignore-comments = false
 terminal.error-on-warning = true
 
-[tool.pytest.ini_options]
-xfail_strict = true
-log_cli = true
+[tool.pytest]
+ini_options.xfail_strict = true
+ini_options.log_cli = true
 
 [tool.coverage]
 run.branch = true
