@@ -34,8 +34,13 @@ jobs:
           cache-dependency-glob: '**/pyproject.toml'
 
       - name: Run tests
+        # We invoke ``coverage run`` rather than ``pytest --cov`` so that
+        # coverage starts before pytest loads our plugin via its
+        # ``pytest11`` entry point — otherwise the plugin's module-level
+        # imports run before tracing begins and are reported as missed.
         run: |
-          uv run --extra=dev --python=${{ matrix.python-version }} pytest -s -vvv tests/
+          uv run --extra=dev --python=${{ matrix.python-version }} coverage run -m pytest -s -vvv tests/
+          uv run --extra=dev --python=${{ matrix.python-version }} coverage report
 
   completion-ci:
     needs: build
