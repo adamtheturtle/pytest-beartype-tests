@@ -161,7 +161,7 @@ ignore = [
 ]
 
 [tool.deptry]
-pep621_dev_dependency_groups = [
+optional_dependencies_dev_groups = [
     "dev",
 ]
 # pytest is required at runtime: it loads our plugin via the ``pytest11``
@@ -191,7 +191,7 @@ typeCheckingMode = "strict"
 analysis.respect-type-ignore-comments = false
 terminal.error-on-warning = true
 
-[tool.pytest]
+[tool.pytest.ini_options]
 xfail_strict = true
 log_cli = true
 
