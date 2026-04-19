@@ -25,6 +25,7 @@ def beartype_call_count() -> dict:
 
 def test_type_correct_test_passes(pytester: pytest.Pytester) -> None:
     """A test whose values match their annotations runs normally."""
+    # https://github.com/pytest-dev/pytest/pull/14080
     _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
         """
         def test_ok() -> None:
@@ -40,6 +41,7 @@ def test_argument_violating_annotation_fails(
     pytester: pytest.Pytester,
 ) -> None:
     """Parametrized values that violate a type annotation fail."""
+    # https://github.com/pytest-dev/pytest/pull/14080
     _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
         """
         import pytest
@@ -57,6 +59,7 @@ def test_class_based_test_is_type_checked(
     pytester: pytest.Pytester,
 ) -> None:
     """Methods on test classes are also wrapped with beartype."""
+    # https://github.com/pytest-dev/pytest/pull/14080
     _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
         """
         import pytest
@@ -76,6 +79,7 @@ def test_wrapper_cached_across_parametrized_items(
 ) -> None:
     """Parametrized items share a single beartype wrapper."""
     _ = pytester.makeconftest(_COUNTING_CONFTEST)
+    # https://github.com/pytest-dev/pytest/pull/14080
     _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
         """
         import pytest
@@ -94,6 +98,7 @@ def test_each_distinct_function_is_wrapped_once(
 ) -> None:
     """Distinct test functions each get their own beartype call."""
     _ = pytester.makeconftest(_COUNTING_CONFTEST)
+    # https://github.com/pytest-dev/pytest/pull/14080
     _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
         """
         def test_one(beartype_call_count: dict) -> None:
@@ -111,6 +116,7 @@ def test_same_named_methods_in_different_classes_keep_own_types(
     pytester: pytest.Pytester,
 ) -> None:
     """Same-named methods in different classes get class-specific wrappers."""
+    # https://github.com/pytest-dev/pytest/pull/14080
     _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
         """
         import pytest
@@ -132,6 +138,7 @@ def test_same_named_methods_in_different_classes_keep_own_types(
 
 def test_return_annotation_is_enforced(pytester: pytest.Pytester) -> None:
     """A test returning a value that violates its return annotation fails."""
+    # https://github.com/pytest-dev/pytest/pull/14080
     _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
         """
         def test_bad_return() -> None:
