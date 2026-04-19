@@ -171,6 +171,7 @@ ignore = [
 [tool.deptry]
 optional_dependencies_dev_groups = [
     "dev",
+    "release",
 ]
 # pytest is required at runtime: it loads our plugin via the ``pytest11``
 # entry point. The ``import pytest`` statement is only needed for typing.
