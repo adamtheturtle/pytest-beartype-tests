@@ -159,6 +159,8 @@ ignore = [
     ".pre-commit-config.yaml",
     "LICENSE",
     "conftest.py",
+    "tests",
+    "tests/**",
     "uv.lock",
     "zizmor.yml",
 ]
