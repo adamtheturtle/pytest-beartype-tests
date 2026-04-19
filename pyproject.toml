@@ -157,6 +157,7 @@ MASTER.unsafe-load-any-extension = false
 ignore = [
     ".pre-commit-config.yaml",
     "LICENSE",
+    "conftest.py",
     "uv.lock",
     "zizmor.yml",
 ]
@@ -215,6 +216,8 @@ exclude = [ ".venv" ]
 ignore_names = [
     # pytest plugin hook implementation.
     "pytest_collection_modifyitems",
+    # pytest discovers ``pytest_plugins`` declarations in conftest files.
+    "pytest_plugins",
 ]
 
 [tool.yamlfix]
