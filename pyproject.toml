@@ -58,7 +58,7 @@ optional-dependencies.dev = [
     "ty==0.0.31",
     "vulture==2.16",
     "yamlfix==1.19.1",
-    "zizmor==1.23.1",
+    "zizmor==1.24.1",
 ]
 urls.Source = "https://github.com/adamtheturtle/pytest-beartype-tests"
 entry-points.pytest11.pytest_beartype_tests = "pytest_beartype_tests.plugin"
