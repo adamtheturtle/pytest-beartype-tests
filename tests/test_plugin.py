@@ -147,3 +147,20 @@ def test_return_annotation_is_enforced(pytester: pytest.Pytester) -> None:
     )
     result = pytester.runpytest()
     result.assert_outcomes(failed=1)
+
+
+def test_non_function_items_are_skipped(pytester: pytest.Pytester) -> None:
+    """Collected items that are not ``pytest.Function`` are left alone."""
+    _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
+        '''
+        def add(a: int, b: int) -> int:
+            """Add two numbers.
+
+            >>> add(1, 2)
+            3
+            """
+            return a + b
+        ''',
+    )
+    result = pytester.runpytest("--doctest-modules")
+    result.assert_outcomes(passed=1)
