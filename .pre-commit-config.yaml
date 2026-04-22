@@ -1,6 +1,8 @@
 ---
 fail_fast: true
 
+.uv_version: &uv_version uv==0.9.5
+
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
 
@@ -62,21 +64,24 @@ repos:
         language: python
         pass_filenames: false
         types_or: [yaml]
-        additional_dependencies: [uv==0.9.5]
+        additional_dependencies:
+          - *uv_version
 
       - id: shellcheck
         name: shellcheck
         entry: uv run --extra=dev shellcheck --shell=bash
         language: python
         types_or: [shell]
-        additional_dependencies: [uv==0.9.5]
+        additional_dependencies:
+          - *uv_version
 
       - id: shfmt
         name: shfmt
         entry: uv run --extra=dev shfmt --write --space-redirects --indent=4
         language: python
         types_or: [shell]
-        additional_dependencies: [uv==0.9.5]
+        additional_dependencies:
+          - *uv_version
 
       - id: mypy
         name: mypy
@@ -85,7 +90,8 @@ repos:
         language: python
         types_or: [python, toml]
         pass_filenames: false
-        additional_dependencies: [uv==0.9.5]
+        additional_dependencies:
+          - *uv_version
 
       - id: check-manifest
         name: check-manifest
@@ -93,7 +99,8 @@ repos:
         entry: uv run --extra=dev -m check_manifest
         language: python
         pass_filenames: false
-        additional_dependencies: [uv==0.9.5]
+        additional_dependencies:
+          - *uv_version
 
       - id: pyright
         name: pyright
@@ -102,7 +109,8 @@ repos:
         language: python
         types_or: [python, toml]
         pass_filenames: false
-        additional_dependencies: [uv==0.9.5]
+        additional_dependencies:
+          - *uv_version
 
       - id: pyright-verifytypes
         name: pyright-verifytypes
@@ -111,7 +119,8 @@ repos:
         language: python
         pass_filenames: false
         types_or: [python]
-        additional_dependencies: [uv==0.9.5]
+        additional_dependencies:
+          - *uv_version
 
       - id: ty
         name: ty
@@ -120,7 +129,8 @@ repos:
         language: python
         types_or: [python, toml]
         pass_filenames: false
-        additional_dependencies: [uv==0.9.5]
+        additional_dependencies:
+          - *uv_version
 
       - id: pyrefly
         name: pyrefly
@@ -129,7 +139,8 @@ repos:
         language: python
         types_or: [python, toml]
         pass_filenames: false
-        additional_dependencies: [uv==0.9.5]
+        additional_dependencies:
+          - *uv_version
 
       - id: vulture
         name: vulture
@@ -137,7 +148,8 @@ repos:
         language: python
         types_or: [python]
         pass_filenames: false
-        additional_dependencies: [uv==0.9.5]
+        additional_dependencies:
+          - *uv_version
 
       - id: pyroma
         name: pyroma
@@ -145,7 +157,8 @@ repos:
         language: python
         pass_filenames: false
         types_or: [toml]
-        additional_dependencies: [uv==0.9.5]
+        additional_dependencies:
+          - *uv_version
 
       - id: deptry
         name: deptry
@@ -153,7 +166,8 @@ repos:
         language: python
         pass_filenames: false
         types_or: [toml]
-        additional_dependencies: [uv==0.9.5]
+        additional_dependencies:
+          - *uv_version
 
       - id: pylint
         name: pylint
@@ -161,28 +175,32 @@ repos:
         language: python
         stages: [manual]
         pass_filenames: false
-        additional_dependencies: [uv==0.9.5]
+        additional_dependencies:
+          - *uv_version
 
       - id: ruff-check-fix
         name: Ruff check fix
         entry: uv run --extra=dev -m ruff check --fix
         language: python
         types_or: [python]
-        additional_dependencies: [uv==0.9.5]
+        additional_dependencies:
+          - *uv_version
 
       - id: ruff-format-fix
         name: Ruff format
         entry: uv run --extra=dev -m ruff format
         language: python
         types_or: [python]
-        additional_dependencies: [uv==0.9.5]
+        additional_dependencies:
+          - *uv_version
 
       - id: interrogate
         name: interrogate
         entry: uv run --extra=dev -m interrogate
         language: python
         types_or: [python]
-        additional_dependencies: [uv==0.9.5]
+        additional_dependencies:
+          - *uv_version
 
       - id: pyproject-fmt-fix
         name: pyproject-fmt
@@ -190,14 +208,16 @@ repos:
         language: python
         types_or: [toml]
         files: pyproject.toml
-        additional_dependencies: [uv==0.9.5]
+        additional_dependencies:
+          - *uv_version
 
       - id: yamlfix
         name: yamlfix
         entry: uv run --extra=dev yamlfix
         language: python
         types_or: [yaml]
-        additional_dependencies: [uv==0.9.5]
+        additional_dependencies:
+          - *uv_version
 
       - id: zizmor
         name: zizmor
@@ -205,4 +225,5 @@ repos:
         language: python
         pass_filenames: false
         types_or: [yaml]
-        additional_dependencies: [uv==0.9.5]
+        additional_dependencies:
+          - *uv_version
