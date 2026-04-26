@@ -43,8 +43,8 @@ def pytest_collection_modifyitems(items: list[pytest.Item]) -> None:
             # ``pytest.main()`` re-collection of parametrized tests.
             saved_annotate = getattr(annotate_target, "__annotate__", None)
             cache[key] = beartype(obj=underlying)
-            # ``__annotate__`` is a Python 3.14+ attribute (PEP 749)
-            # that some type-checker stubs do not yet model.
-            # pyrefly: ignore[missing-attribute]
-            annotate_target.__annotate__ = saved_annotate
+            # ``__annotate__`` is a Python 3.14+ attribute (PEP 749);
+            # ``setattr`` keeps every supported type-checker happy on
+            # older Python versions where the stubs do not model it.
+            setattr(annotate_target, "__annotate__", saved_annotate)  # noqa: B010
         item.obj = cache[key]
