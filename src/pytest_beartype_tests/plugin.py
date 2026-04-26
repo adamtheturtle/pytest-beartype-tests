@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import types
 from typing import TYPE_CHECKING
 
 import pytest
@@ -25,5 +26,26 @@ def pytest_collection_modifyitems(items: list[pytest.Item]) -> None:
             continue
         key = (item.module, item.cls, item.originalname)
         if key not in cache:
-            cache[key] = beartype(obj=item.obj)
+            underlying = item.obj
+            # Bound methods proxy ``__annotate__`` to their underlying
+            # function but do not allow assignment, so write through to
+            # ``__func__`` for class-based tests.
+            annotate_target = (
+                underlying.__func__
+                if isinstance(underlying, types.MethodType)
+                else underlying
+            )
+            # Snapshot ``__annotate__`` before applying beartype: beartype
+            # replaces it with a closure that crashes under
+            # ``annotationlib.Format.STRING`` (beartype/beartype#637),
+            # which breaks anything that later introspects the original
+            # function's annotations in string form -- notably nested
+            # ``pytest.main()`` re-collection of parametrized tests.
+            saved_annotate = getattr(annotate_target, "__annotate__", None)
+            cache[key] = beartype(obj=underlying)
+            if saved_annotate is not None:
+                # ``__annotate__`` is a Python 3.14+ attribute (PEP 749)
+                # that some type-checker stubs do not yet model.
+                # pyrefly: ignore[missing-attribute]
+                annotate_target.__annotate__ = saved_annotate
         item.obj = cache[key]

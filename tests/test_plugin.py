@@ -149,6 +149,47 @@ def test_return_annotation_is_enforced(pytester: pytest.Pytester) -> None:
     result.assert_outcomes(failed=1)
 
 
+def test_nested_pytest_main_after_beartype(
+    pytester: pytest.Pytester,
+) -> None:
+    """A nested ``pytest.main`` re-collecting tests still succeeds.
+
+    Regression test for
+    https://github.com/adamtheturtle/pytest-beartype-tests/issues/31:
+    beartype mutates the underlying function's ``__annotate__`` to a
+    closure that crashes when invoked with ``Format.STRING``, breaking
+    any subsequent collection that introspects annotations in string form.
+    """
+    _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
+        """
+        from __future__ import annotations
+
+        import pytest
+
+        @pytest.mark.parametrize("value", [1, None])
+        def test_param(value: int | None) -> None:
+            pass
+
+        def test_nested_collection(capsys: pytest.CaptureFixture) -> None:
+            ret = pytest.main(
+                args=[
+                    "--collect-only",
+                    "-q",
+                    "-p",
+                    "no:pytest_beartype_tests",
+                    __file__ + "::test_param",
+                ],
+            )
+            captured = capsys.readouterr()
+            combined = captured.out + captured.err
+            assert "Cannot stringify" not in combined, combined
+            assert ret == 0, combined
+        """,
+    )
+    result = pytester.runpytest()
+    result.assert_outcomes(passed=3)
+
+
 def test_non_function_items_are_skipped(pytester: pytest.Pytester) -> None:
     """Collected items that are not ``pytest.Function`` are left alone."""
     _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
