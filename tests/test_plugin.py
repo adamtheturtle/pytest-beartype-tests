@@ -190,6 +190,34 @@ def test_nested_pytest_main_after_beartype(
     result.assert_outcomes(passed=3)
 
 
+def test_underlying_annotate_is_preserved(
+    pytester: pytest.Pytester,
+) -> None:
+    """The original function's ``__annotate__`` survives beartype.
+
+    A pre-set ``__annotate__`` on a test function is identical-by-object
+    after collection. On Python 3.14+ this verifies the
+    beartype/beartype#637 fix; on older versions it exercises the same
+    save/restore code path so coverage stays at 100%.
+    """
+    _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
+        """
+        def _sentinel_annotate(_format: int) -> dict[str, object]:
+            return {"return": type(None)}
+
+        def test_target() -> None:
+            pass
+
+        test_target.__annotate__ = _sentinel_annotate
+
+        def test_check() -> None:
+            assert test_target.__annotate__ is _sentinel_annotate
+        """,
+    )
+    result = pytester.runpytest()
+    result.assert_outcomes(passed=2)
+
+
 def test_non_function_items_are_skipped(pytester: pytest.Pytester) -> None:
     """Collected items that are not ``pytest.Function`` are left alone."""
     _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
