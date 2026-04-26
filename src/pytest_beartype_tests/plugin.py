@@ -43,8 +43,10 @@ def pytest_collection_modifyitems(items: list[pytest.Item]) -> None:
             # ``pytest.main()`` re-collection of parametrized tests.
             saved_annotate = getattr(annotate_target, "__annotate__", None)
             cache[key] = beartype(obj=underlying)
-            # ``__annotate__`` is a Python 3.14+ attribute (PEP 749);
-            # ``setattr`` keeps every supported type-checker happy on
-            # older Python versions where the stubs do not model it.
+            # B010 ordinarily prefers ``x.attr = ...`` over
+            # ``setattr(x, "attr", ...)``, but ``__annotate__`` is a
+            # Python 3.14+ attribute (PEP 749) not modelled by mypy or
+            # pyright stubs on older versions; ``setattr`` bypasses the
+            # static attribute check uniformly.
             setattr(annotate_target, "__annotate__", saved_annotate)  # noqa: B010
         item.obj = cache[key]
