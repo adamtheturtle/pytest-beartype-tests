@@ -87,6 +87,7 @@ repos:
         name: mypy
         stages: [pre-push]
         entry: uv run --extra=dev -m mypy
+        args: [--num-workers=4]
         language: python
         types_or: [python, toml]
         pass_filenames: false
