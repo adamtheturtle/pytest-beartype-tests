@@ -58,7 +58,6 @@ repos:
     hooks:
       - id: text-unicode-replacement-char
 
-
   - repo: local
     hooks:
       - id: actionlint
@@ -196,7 +195,6 @@ repos:
         types_or: [python]
         additional_dependencies:
           - *uv_version
-
 
       - id: strict-kwargs-fix
         name: strict-kwargs
