@@ -10,6 +10,7 @@ ci:
   # We use system Python, with required dependencies specified in pyproject.toml.
   # We therefore cannot use those dependencies in pre-commit CI.
   skip:
+    - strict-kwargs
     - actionlint
     - check-manifest
     - deptry
@@ -55,6 +56,12 @@ repos:
     rev: v1.10.0
     hooks:
       - id: text-unicode-replacement-char
+
+  - repo: https://github.com/adamtheturtle/strict-kwargs
+    rev: 2026.5.18
+    hooks:
+      - id: strict-kwargs
+        args: [fix]
 
   - repo: local
     hooks:
