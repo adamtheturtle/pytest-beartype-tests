@@ -25,6 +25,7 @@ ci:
     - ruff-format-fix
     - shellcheck
     - shfmt
+    - strict-kwargs-fix
     - ty
     - pyrefly
     - vulture
@@ -56,12 +57,6 @@ repos:
     rev: v1.10.0
     hooks:
       - id: text-unicode-replacement-char
-
-  - repo: https://github.com/adamtheturtle/strict-kwargs
-    rev: 2026.5.18
-    hooks:
-      - id: strict-kwargs
-        args: [fix]
 
   - repo: local
     hooks:
@@ -200,6 +195,15 @@ repos:
         types_or: [python]
         additional_dependencies:
           - *uv_version
+
+      - id: strict-kwargs-fix
+        name: strict-kwargs
+        entry: uv run --extra=dev strict-kwargs fix
+        language: python
+        types_or: [python]
+        additional_dependencies:
+          - *uv_version
+        require_serial: true
 
       - id: interrogate
         name: interrogate
