@@ -66,6 +66,7 @@ optional-dependencies.dev = [
 ]
 optional-dependencies.release = [
     "check-wheel-contents==0.6.3",
+    "towncrier==25.8.0",
 ]
 urls.Source = "https://github.com/adamtheturtle/pytest-beartype-tests"
 entry-points.pytest11.pytest_beartype_tests = "pytest_beartype_tests.plugin"

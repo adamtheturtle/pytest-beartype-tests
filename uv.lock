@@ -1205,6 +1205,7 @@ dev = [
 ]
 release = [
     { name = "check-wheel-contents" },
+    { name = "towncrier" },
 ]
 
 [package.metadata]
@@ -1231,6 +1232,7 @@ requires-dist = [
     { name = "shfmt-py", marker = "extra == 'dev'", specifier = "==4.0.0" },
     { name = "strict-kwargs", marker = "extra == 'dev'", specifier = "==2026.5.19.post3" },
     { name = "towncrier", marker = "extra == 'dev'", specifier = "==25.8.0" },
+    { name = "towncrier", marker = "extra == 'release'", specifier = "==25.8.0" },
     { name = "ty", marker = "extra == 'dev'", specifier = "==0.0.38" },
     { name = "vulture", marker = "extra == 'dev'", specifier = "==2.16" },
     { name = "yamlfix", marker = "extra == 'dev'", specifier = "==1.19.1" },
