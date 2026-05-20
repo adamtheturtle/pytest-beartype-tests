@@ -58,6 +58,7 @@ optional-dependencies.dev = [
     "shellcheck-py==0.11.0.1",
     "shfmt-py==4.0.0",
     "strict-kwargs==2026.5.19.post3",
+    "towncrier==25.8.0",
     "ty==0.0.38",
     "vulture==2.16",
     "yamlfix==1.19.1",
@@ -173,10 +174,14 @@ DEPRECATED_BUILTINS.bad-functions = [
 [tool.check-manifest]
 ignore = [
     ".pre-commit-config.yaml",
+    "CHANGELOG.rst",
     "LICENSE",
     "conftest.py",
+    "newsfragments",
+    "newsfragments/**",
     "tests",
     "tests/**",
+    "towncrier_template.rst.jinja",
     "uv.lock",
     "zizmor.yml",
 ]
@@ -226,6 +231,30 @@ report.exclude_also = [
 ]
 report.fail_under = 100
 report.show_missing = true
+
+[tool.towncrier]
+# The changelog and the per-release GitHub release notes are both built
+# from news fragments under ``newsfragments/``.  The release workflow
+# runs ``towncrier build`` to assemble them; contributors add one
+# fragment file per user-facing change.
+directory = "newsfragments"
+filename = "CHANGELOG.rst"
+# Custom template so an assembled version reproduces the historical
+# style exactly: a bare ``<version>`` heading (no project name, no
+# date) followed by a flat bullet list with no per-type sub-headings.
+template = "towncrier_template.rst.jinja"
+title_format = "{version}"
+# ``title_format`` underline first, then any nested headings.  A bare
+# version such as ``2026.05.18`` underlined with ``-`` matches every
+# pre-towncrier entry in CHANGELOG.rst.
+underlines = [ "-", "~", "^" ]
+issue_format = "#{issue}"
+type = [
+    # A single, unnamed fragment type keeps the assembled output as one
+    # flat bullet list, matching the historical changelog (which never
+    # grouped entries under "Features"/"Bugfixes"/... sub-headings).
+    { directory = "change", name = "", showcontent = true },
+]
 
 [tool.interrogate]
 fail-under = 100
