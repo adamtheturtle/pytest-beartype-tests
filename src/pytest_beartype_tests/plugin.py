@@ -41,12 +41,22 @@ def pytest_collection_modifyitems(items: list[pytest.Item]) -> None:
             # which breaks anything that later introspects the original
             # function's annotations in string form -- notably nested
             # ``pytest.main()`` re-collection of parametrized tests.
-            saved_annotate = getattr(annotate_target, "__annotate__", None)
+            try:
+                saved_annotate = object.__getattribute__(
+                    annotate_target,
+                    "__annotate__",
+                )
+            except AttributeError:
+                saved_annotate = None
             cache[key] = beartype(obj=underlying)
-            # B010 ordinarily prefers ``x.attr = ...`` over
-            # ``setattr(x, "attr", ...)``, but ``__annotate__`` is a
-            # Python 3.14+ attribute (PEP 749) not modelled by mypy or
-            # pyright stubs on older versions; ``setattr`` bypasses the
-            # static attribute check uniformly.
-            setattr(annotate_target, "__annotate__", saved_annotate)  # noqa: B010
+            # B010 ordinarily prefers ``x.attr = ...`` over assignment via
+            # ``object.__setattr__``, but ``__annotate__`` is a Python 3.14+
+            # attribute (PEP 749) not modelled by mypy or pyright stubs on
+            # older versions; ``object.__setattr__`` bypasses the static
+            # attribute check uniformly.
+            object.__setattr__(
+                annotate_target,
+                "__annotate__",
+                saved_annotate,
+            )
         item.obj = cache[key]
