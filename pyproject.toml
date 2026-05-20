@@ -42,7 +42,7 @@ optional-dependencies.dev = [
     "deptry==0.25.1",
     "interrogate==1.7.0",
     "mypy[faster-cache]==2.1.0",
-    "mypy-strict-kwargs==2026.1.12",
+    "mypy-strict-kwargs==2026.5.19",
     "prek==0.4.0",
     "pylint==4.0.5",
     "pylint-per-file-ignores==3.2.1",
