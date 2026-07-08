@@ -83,6 +83,11 @@ zip-safe = false
 [tool.setuptools_scm]
 version_scheme = "post-release"
 
+[tool.uv]
+# pytest 9.0.3 still lacks the pytester.makepyfile typing fix from pytest-dev/pytest#14080.
+# Keep local uv resolution pinned until a pytest release includes it.
+sources.pytest = { git = "https://github.com/pytest-dev/pytest.git", rev = "fd90f701b3356998fc0562a1fae3c52afcf8e0dc" }
+
 [tool.ruff]
 line-length = 79
 lint.select = [
