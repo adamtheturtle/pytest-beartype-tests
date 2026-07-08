@@ -25,8 +25,7 @@ def beartype_call_count() -> dict:
 
 def test_type_correct_test_passes(pytester: pytest.Pytester) -> None:
     """A test whose values match their annotations runs normally."""
-    # https://github.com/pytest-dev/pytest/pull/14080
-    _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
+    pytester.makepyfile(
         """
         def test_ok() -> None:
             x: int = 1
@@ -41,8 +40,7 @@ def test_argument_violating_annotation_fails(
     pytester: pytest.Pytester,
 ) -> None:
     """Parametrized values that violate a type annotation fail."""
-    # https://github.com/pytest-dev/pytest/pull/14080
-    _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
+    pytester.makepyfile(
         """
         import pytest
 
@@ -59,8 +57,7 @@ def test_class_based_test_is_type_checked(
     pytester: pytest.Pytester,
 ) -> None:
     """Methods on test classes are also wrapped with beartype."""
-    # https://github.com/pytest-dev/pytest/pull/14080
-    _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
+    pytester.makepyfile(
         """
         import pytest
 
@@ -79,8 +76,7 @@ def test_wrapper_cached_across_parametrized_items(
 ) -> None:
     """Parametrized items share a single beartype wrapper."""
     _ = pytester.makeconftest(source=_COUNTING_CONFTEST)
-    # https://github.com/pytest-dev/pytest/pull/14080
-    _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
+    pytester.makepyfile(
         """
         import pytest
 
@@ -98,8 +94,7 @@ def test_each_distinct_function_is_wrapped_once(
 ) -> None:
     """Distinct test functions each get their own beartype call."""
     _ = pytester.makeconftest(source=_COUNTING_CONFTEST)
-    # https://github.com/pytest-dev/pytest/pull/14080
-    _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
+    pytester.makepyfile(
         """
         def test_one(beartype_call_count: dict) -> None:
             assert beartype_call_count["n"] == 2
@@ -116,8 +111,7 @@ def test_same_named_methods_in_different_classes_keep_own_types(
     pytester: pytest.Pytester,
 ) -> None:
     """Same-named methods in different classes get class-specific wrappers."""
-    # https://github.com/pytest-dev/pytest/pull/14080
-    _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
+    pytester.makepyfile(
         """
         import pytest
 
@@ -138,8 +132,7 @@ def test_same_named_methods_in_different_classes_keep_own_types(
 
 def test_return_annotation_is_enforced(pytester: pytest.Pytester) -> None:
     """A test returning a value that violates its return annotation fails."""
-    # https://github.com/pytest-dev/pytest/pull/14080
-    _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
+    pytester.makepyfile(
         """
         def test_bad_return() -> None:
             return "not None"  # type: ignore[return-value]
@@ -160,7 +153,7 @@ def test_nested_pytest_main_after_beartype(
     closure that crashes when invoked with ``Format.STRING``, breaking
     any subsequent collection that introspects annotations in string form.
     """
-    _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
+    pytester.makepyfile(
         """
         from __future__ import annotations
 
@@ -200,7 +193,7 @@ def test_underlying_annotate_is_preserved(
     beartype/beartype#637 fix; on older versions it exercises the same
     save/restore code path so coverage stays at 100%.
     """
-    _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
+    pytester.makepyfile(
         """
         def _sentinel_annotate(_format: int) -> dict[str, object]:
             return {"return": type(None)}
@@ -220,7 +213,7 @@ def test_underlying_annotate_is_preserved(
 
 def test_non_function_items_are_skipped(pytester: pytest.Pytester) -> None:
     """Collected items that are not ``pytest.Function`` are left alone."""
-    _ = pytester.makepyfile(  # pyright: ignore[reportUnknownMemberType]
+    pytester.makepyfile(
         '''
         def add(a: int, b: int) -> int:
             """Add two numbers.
