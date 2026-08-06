@@ -16,7 +16,7 @@ Install
 
    uv add --dev pytest-beartype-tests
 
-The plugin auto-registers via the ``pytest11`` entry point — there is no configuration.
+The plugin auto-registers via the ``pytest11`` entry point, so there is no configuration.
 
 What it does
 ------------
