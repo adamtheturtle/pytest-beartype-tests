@@ -10,7 +10,7 @@ name = "pytest-beartype-tests"
 description = "Pytest plugin that applies @beartype to every collected test function."
 readme = { file = "README.rst", content-type = "text/x-rst" }
 keywords = [
-    "beartype",
+    "beartype==0.23.0rc0",
     "pytest",
     "type-checking",
 ]
@@ -33,7 +33,7 @@ dynamic = [
     "version",
 ]
 dependencies = [
-    "beartype>=0.18",
+    "beartype==0.23.0rc0",
     "pytest>=8",
 ]
 optional-dependencies.dev = [
