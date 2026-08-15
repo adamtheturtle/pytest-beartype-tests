@@ -43,16 +43,16 @@ optional-dependencies.dev = [
     "interrogate==1.7.0",
     "mypy[faster-cache]==2.3.0",
     "mypy-strict-kwargs==2026.7.19.1",
-    "no-defaults==1.0.1",
-    "prek==0.4.12",
-    "pylint==4.0.6",
+    "no-defaults==2.1.0",
+    "prek==0.4.13",
+    "pylint==4.0.7",
     "pylint-per-file-ignores==3.2.1",
     "pyproject-fmt==2.27.0",
     "pyrefly==1.2.0",
     "pyright==1.1.411",
     "pyroma==5.0.1",
     "pytest-cov==7.1.0",
-    "ruff==0.16.1",
+    "ruff==0.16.2",
     # We add shellcheck-py not only for shell scripts and shell code blocks,
     # but also because having it installed means that ``actionlint-py`` will
     # use it to lint shell commands in GitHub workflow files.
@@ -233,6 +233,7 @@ max_supported_python = "3.14"
 [tool.mypy]
 files = [ "." ]
 exclude = [ "build" ]
+exclude_gitignore = true
 follow_untyped_imports = true
 strict = true
 plugins = [ "mypy_strict_kwargs" ]
