@@ -255,12 +255,12 @@ ini_options.xfail_strict = true
 ini_options.log_cli = true
 
 [tool.coverage]
-run.branch = true
 run.source = [ "src", "tests" ]
+run.branch = true
+report.fail_under = 100
 report.exclude_also = [
     "if TYPE_CHECKING:",
 ]
-report.fail_under = 100
 report.show_missing = true
 
 [tool.towncrier]
