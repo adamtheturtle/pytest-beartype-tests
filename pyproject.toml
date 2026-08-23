@@ -193,13 +193,13 @@ omit-covered-files = true
 
 [tool.check-manifest]
 ignore = [
-    "prek.toml",
     ".vale.ini",
     "CHANGELOG.rst",
     "conftest.py",
     "LICENSE",
     "newsfragments",
     "newsfragments/**",
+    "prek.toml",
     "tests",
     "tests/**",
     "towncrier_template.rst.jinja",
