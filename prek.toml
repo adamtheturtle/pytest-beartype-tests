@@ -1,0 +1,266 @@
+# Configuration file for `prek`, a git hook framework written in Rust.
+# See https://prek.j178.dev for more information.
+#:schema https://www.schemastore.org/prek.json
+
+fail_fast = true
+default_install_hook_types = [
+  "pre-commit",
+  "pre-push"
+  ]
+
+[[repos]]
+repo = "meta"
+hooks = [
+  { id = "check-useless-excludes" }
+]
+
+[[repos]]
+repo = "https://github.com/pre-commit/pre-commit-hooks"
+rev = "v6.0.0"
+hooks = [
+  { id = "check-added-large-files" },
+  { id = "check-case-conflict" },
+  { id = "check-executables-have-shebangs" },
+  { id = "check-merge-conflict" },
+  { id = "check-shebang-scripts-are-executable" },
+  { id = "check-symlinks" },
+  { id = "check-json" },
+  { id = "check-toml" },
+  { id = "check-vcs-permalinks" },
+  { id = "check-yaml" },
+  { id = "end-of-file-fixer" },
+  { id = "trailing-whitespace" }
+]
+
+[[repos]]
+repo = "https://github.com/pre-commit/pygrep-hooks"
+rev = "v1.10.0"
+hooks = [
+  { id = "text-unicode-replacement-char" }
+]
+
+[[repos]]
+repo = "local"
+hooks = [
+  {
+    id = "actionlint",
+    name = "actionlint",
+    entry = "uv run --extra=dev actionlint",
+    language = "python",
+    pass_filenames = false,
+    types_or = ["yaml"],
+    additional_dependencies = ["uv==0.11.7"]
+  },
+  {
+    id = "shellcheck",
+    name = "shellcheck",
+    entry = "uv run --extra=dev shellcheck --shell=bash",
+    language = "python",
+    types_or = ["shell"],
+    additional_dependencies = ["uv==0.11.7"]
+  },
+  {
+    id = "shfmt",
+    name = "shfmt",
+    entry = "uv run --extra=dev shfmt --write --space-redirects --indent=4",
+    language = "python",
+    types_or = ["shell"],
+    additional_dependencies = ["uv==0.11.7"]
+  },
+  {
+    id = "mypy",
+    name = "mypy",
+    stages = ["pre-push"],
+    entry = "uv run --extra=dev -m mypy --num-workers=0",
+    language = "python",
+    types_or = [
+      "python",
+      "toml"
+    ],
+    pass_filenames = false,
+    additional_dependencies = ["uv==0.11.7"]
+  },
+  {
+    id = "check-manifest",
+    name = "check-manifest",
+    stages = ["pre-push"],
+    entry = "uv run --extra=dev -m check_manifest",
+    language = "python",
+    pass_filenames = false,
+    additional_dependencies = ["uv==0.11.7"]
+  },
+  {
+    id = "pyright",
+    name = "pyright",
+    stages = ["pre-push"],
+    entry = "uv run --extra=dev -m pyright .",
+    language = "python",
+    types_or = [
+      "python",
+      "toml"
+    ],
+    pass_filenames = false,
+    additional_dependencies = ["uv==0.11.7"]
+  },
+  {
+    id = "pyright-verifytypes",
+    name = "pyright-verifytypes",
+    stages = ["pre-push"],
+    entry = "uv run --extra=dev -m pyright --verifytypes pytest_beartype_tests",
+    language = "python",
+    pass_filenames = false,
+    types_or = ["python"],
+    additional_dependencies = ["uv==0.11.7"]
+  },
+  {
+    id = "ty",
+    name = "ty",
+    stages = ["pre-push"],
+    entry = "uv run --extra=dev ty check",
+    language = "python",
+    types_or = [
+      "python",
+      "toml"
+    ],
+    pass_filenames = false,
+    additional_dependencies = ["uv==0.11.7"]
+  },
+  {
+    id = "pyrefly",
+    name = "pyrefly",
+    stages = ["pre-push"],
+    entry = "uv run --extra=dev pyrefly check",
+    language = "python",
+    types_or = [
+      "python",
+      "toml"
+    ],
+    pass_filenames = false,
+    additional_dependencies = ["uv==0.11.7"]
+  },
+  {
+    id = "vulture",
+    name = "vulture",
+    entry = "uv run --extra=dev -m vulture .",
+    language = "python",
+    types_or = ["python"],
+    pass_filenames = false,
+    additional_dependencies = ["uv==0.11.7"]
+  },
+  {
+    id = "pyroma",
+    name = "pyroma",
+    entry = "uv run --extra=dev -m pyroma --min 10 .",
+    language = "python",
+    pass_filenames = false,
+    types_or = ["toml"],
+    additional_dependencies = ["uv==0.11.7"]
+  },
+  {
+    id = "deptry",
+    name = "deptry",
+    entry = "uv run --extra=dev -m deptry src/",
+    language = "python",
+    pass_filenames = false,
+    types_or = ["toml"],
+    additional_dependencies = ["uv==0.11.7"]
+  },
+  {
+    id = "pylint",
+    name = "pylint",
+    entry = "uv run --extra=dev -m pylint src/",
+    language = "python",
+    stages = ["manual"],
+    pass_filenames = false,
+    additional_dependencies = ["uv==0.11.7"]
+  },
+  {
+    id = "ruff-check-fix",
+    name = "Ruff check fix",
+    entry = "uv run --extra=dev -m ruff check --fix",
+    language = "python",
+    types_or = ["python"],
+    additional_dependencies = ["uv==0.11.7"]
+  },
+  {
+    id = "ruff-format-fix",
+    name = "Ruff format",
+    entry = "uv run --extra=dev -m ruff format",
+    language = "python",
+    types_or = ["python"],
+    additional_dependencies = ["uv==0.11.7"]
+  },
+  {
+    id = "strict-kwargs-fix",
+    name = "strict-kwargs",
+    entry = "uv run --extra=dev strict-kwargs check --fix",
+    language = "python",
+    types_or = ["python"],
+    additional_dependencies = ["uv==0.11.7"],
+    require_serial = true
+  },
+  {
+    id = "no-defaults",
+    name = "no-defaults",
+    entry = "uv run --extra=dev no-defaults",
+    language = "python",
+    types_or = ["python"],
+    additional_dependencies = ["uv==0.11.7"],
+    require_serial = true
+  },
+  {
+    id = "vale-sync",
+    name = "vale sync",
+    entry = "uv run --extra=dev vale sync",
+    language = "python",
+    pass_filenames = false,
+    files = '(\.(rst|md)$|^\.vale\.ini$)',
+    additional_dependencies = ["uv==0.11.7"]
+  },
+  {
+    id = "vale",
+    name = "vale",
+    entry = "uv run --extra=dev vale",
+    language = "python",
+    types_or = [
+      "rst",
+      "markdown"
+    ],
+    require_serial = true,
+    additional_dependencies = ["uv==0.11.7"]
+  },
+  {
+    id = "interrogate",
+    name = "interrogate",
+    entry = "uv run --extra=dev -m interrogate",
+    language = "python",
+    types_or = ["python"],
+    additional_dependencies = ["uv==0.11.7"]
+  },
+  {
+    id = "pyproject-fmt-fix",
+    name = "pyproject-fmt",
+    entry = "uv run --extra=dev pyproject-fmt",
+    language = "python",
+    types_or = ["toml"],
+    files = "pyproject.toml",
+    additional_dependencies = ["uv==0.11.7"]
+  },
+  {
+    id = "yamlfix",
+    name = "yamlfix",
+    entry = "uv run --extra=dev yamlfix",
+    language = "python",
+    types_or = ["yaml"],
+    additional_dependencies = ["uv==0.11.7"]
+  },
+  {
+    id = "zizmor",
+    name = "zizmor",
+    entry = "uv run --extra=dev zizmor --strict-collection .github",
+    language = "python",
+    pass_filenames = false,
+    types_or = ["yaml"],
+    additional_dependencies = ["uv==0.11.7"]
+  }
+]
