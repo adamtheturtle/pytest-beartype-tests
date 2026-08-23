@@ -193,7 +193,7 @@ omit-covered-files = true
 
 [tool.check-manifest]
 ignore = [
-    ".pre-commit-config.yaml",
+    "prek.toml",
     ".vale.ini",
     "CHANGELOG.rst",
     "conftest.py",
