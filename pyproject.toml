@@ -42,7 +42,7 @@ optional-dependencies.dev = [
     "deptry==0.25.1",
     "interrogate==1.7.0",
     "mypy[faster-cache]==2.3.1",
-    "mypy-strict-kwargs==2026.8.20.1",
+    "mypy-strict-kwargs==2026.8.25.1",
     "no-defaults==2.1.0",
     "prek==0.4.14",
     "pylint==4.0.7",
@@ -294,9 +294,3 @@ whitelines = 1
 [tool.no_defaults]
 private_only = true
 per_file_enforcement."tests/**" = "all"
-
-[tool.mypy_strict_kwargs]
-ignore_names = [
-    "beartype._decor.decorcache.beartype",
-    "_pytest.fixtures.fixture",
-]
