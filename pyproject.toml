@@ -58,7 +58,7 @@ optional-dependencies.dev = [
     # use it to lint shell commands in GitHub workflow files.
     "shellcheck-py==0.11.0.1",
     "shfmt-py==4.0.0",
-    "strict-kwargs==2026.8.16",
+    "strict-kwargs==2026.8.24",
     "towncrier==25.8.0",
     "ty==0.0.74",
     "vale==3.17.1.0",
