@@ -1252,7 +1252,7 @@ requires-dist = [
     { name = "ruff", marker = "extra == 'dev'", specifier = "==0.16.5" },
     { name = "shellcheck-py", marker = "extra == 'dev'", specifier = "==0.11.0.1" },
     { name = "shfmt-py", marker = "extra == 'dev'", specifier = "==4.0.0" },
-    { name = "strict-kwargs", marker = "extra == 'dev'", specifier = "==2026.8.24" },
+    { name = "strict-kwargs", marker = "extra == 'dev'", specifier = "==2026.8.28.post2" },
     { name = "towncrier", marker = "extra == 'dev'", specifier = "==25.8.0" },
     { name = "towncrier", marker = "extra == 'release'", specifier = "==25.8.0" },
     { name = "ty", marker = "extra == 'dev'", specifier = "==0.0.75" },
@@ -1400,15 +1400,17 @@ wheels = [
 
 [[package]]
 name = "strict-kwargs"
-version = "2026.8.24"
+version = "2026.8.28.post2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "ty" },
 ]
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a6/b1/47e1034415ac31469d81d4aac7070f0d4123de3b4b77759316fa56ef01e5/strict_kwargs-2026.8.24-py3-none-macosx_11_0_arm64.whl", hash = "sha256:d740684600c422586d917ea8139f2b7358221f0669fab074dfdf9218c5509ec9", size = 3182608, upload-time = "2026-08-24T07:32:09.959Z" },
-    { url = "https://files.pythonhosted.org/packages/f8/e4/a13a6b3c1e6bb7c9a0b0c4bf4f70efd24857e8ff594e951d82eb2004f83a/strict_kwargs-2026.8.24-py3-none-manylinux_2_39_x86_64.whl", hash = "sha256:d39d5859eabe9d5a9e4aee0ca7c720fdcf32ac8cce5f0d02f1463e665b7573a0", size = 3388696, upload-time = "2026-08-24T07:32:12.166Z" },
-    { url = "https://files.pythonhosted.org/packages/e1/78/094ea71397cf6812cafa5b769c971f4442e304617560b4c0842dcda4862a/strict_kwargs-2026.8.24-py3-none-win_amd64.whl", hash = "sha256:d5c7d4f425a28546700d528d01977e7275e1e4b695862fa7c0ec3fe3c2c7b731", size = 3084692, upload-time = "2026-08-24T07:32:14.116Z" },
+    { url = "https://files.pythonhosted.org/packages/a9/16/73ed35c34cc59eec39fa7fe86f067eabab5f78b30d552eba8eb06c9f01c8/strict_kwargs-2026.8.28.post2-py3-none-macosx_10_12_x86_64.whl", hash = "sha256:7426ea32b2a89d76648c88e64e14787c252eaa62d0239671b4be055de8a4194b", size = 3342157, upload-time = "2026-08-28T13:38:10.338Z" },
+    { url = "https://files.pythonhosted.org/packages/1b/37/73d6e97c64cf3296ff88d6bdc4e8e57fee074619dbae4480fcfb429d16b3/strict_kwargs-2026.8.28.post2-py3-none-macosx_11_0_arm64.whl", hash = "sha256:28579c550ce3f9f0a8b77d111f8ac70a50636e218a1a403497f7bb6e9c05739f", size = 3263095, upload-time = "2026-08-28T13:38:12.371Z" },
+    { url = "https://files.pythonhosted.org/packages/c6/a2/a7cba32fabc14298820e9d136a3b52a5e33c848b653179497f9d18cd115f/strict_kwargs-2026.8.28.post2-py3-none-manylinux_2_39_aarch64.whl", hash = "sha256:fe2e46aac30de7e8969c30f2db28912df5a51e0c5f71b7c610178dedb5ff2777", size = 3402934, upload-time = "2026-08-28T13:38:14.585Z" },
+    { url = "https://files.pythonhosted.org/packages/c4/8c/0de9a03d6a6dc7d12febe68ae27be5c7bfca27f8c96a19a635b7aef9aa21/strict_kwargs-2026.8.28.post2-py3-none-manylinux_2_39_x86_64.whl", hash = "sha256:450f3a75ef5041a6c364f00708e611915e2c0c15c1f385e3c821115222fe330c", size = 3471710, upload-time = "2026-08-28T13:38:16.529Z" },
+    { url = "https://files.pythonhosted.org/packages/34/89/df89790f6a3c14964281e200d90b9153f2283dfa6dd49bc360083a6a8fba/strict_kwargs-2026.8.28.post2-py3-none-win_amd64.whl", hash = "sha256:278ea3b4226edf7b1d986c6c58daa245ca5db781709447ab488a840ac8062184", size = 3162552, upload-time = "2026-08-28T13:38:18.541Z" },
 ]
 
 [[package]]
