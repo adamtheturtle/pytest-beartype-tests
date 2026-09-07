@@ -59,7 +59,7 @@ optional-dependencies.dev = [
     "shellcheck-py==0.11.0.1",
     "shfmt-py==4.1.0",
     "strict-kwargs==2026.8.28.post2",
-    "towncrier==25.8.0",
+    "towncrier==26.9.0",
     "ty==0.0.77",
     "vale==3.19.0.0",
     "vulture==2.16",
@@ -68,7 +68,7 @@ optional-dependencies.dev = [
 ]
 optional-dependencies.release = [
     "check-wheel-contents==0.6.3",
-    "towncrier==25.8.0",
+    "towncrier==26.9.0",
 ]
 urls.Source = "https://github.com/adamtheturtle/pytest-beartype-tests"
 entry-points.pytest11.pytest_beartype_tests = "pytest_beartype_tests.plugin"
