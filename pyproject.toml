@@ -242,7 +242,7 @@ plugins = [ "mypy_strict_kwargs" ]
 
 [tool.pyrefly]
 errors.non-exhaustive-match = "error"
-errors.unused-ignore = "error"
+preset = "strict"
 
 [tool.pyright]
 typeCheckingMode = "strict"
