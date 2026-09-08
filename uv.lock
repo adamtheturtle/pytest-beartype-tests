@@ -1211,7 +1211,6 @@ dev = [
     { name = "ruff" },
     { name = "shellcheck-py" },
     { name = "shfmt-py" },
-    { name = "snapper-fmt" },
     { name = "strict-kwargs" },
     { name = "towncrier" },
     { name = "ty" },
@@ -1223,6 +1222,9 @@ dev = [
 release = [
     { name = "check-wheel-contents" },
     { name = "towncrier" },
+]
+snapper = [
+    { name = "snapper-fmt" },
 ]
 
 [package.metadata]
@@ -1251,7 +1253,6 @@ dev = [
     { name = "ruff", specifier = "==0.16.6" },
     { name = "shellcheck-py", specifier = "==0.11.0.1" },
     { name = "shfmt-py", specifier = "==4.1.0" },
-    { name = "snapper-fmt", git = "https://github.com/TurtleTech-ehf/snapper.git?rev=bcd3458e27e4156ce4e0a0b55a227400328fb3b1" },
     { name = "strict-kwargs", specifier = "==2026.8.28.post2" },
     { name = "towncrier", specifier = "==26.9.0" },
     { name = "ty", specifier = "==0.0.78" },
@@ -1264,6 +1265,7 @@ release = [
     { name = "check-wheel-contents", specifier = "==0.6.3" },
     { name = "towncrier", specifier = "==26.9.0" },
 ]
+snapper = [{ name = "snapper-fmt", git = "https://github.com/TurtleTech-ehf/snapper.git?rev=bcd3458e27e4156ce4e0a0b55a227400328fb3b1" }]
 
 [[package]]
 name = "pytest-cov"
