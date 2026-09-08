@@ -39,8 +39,8 @@ jobs:
         # ``pytest11`` entry point — otherwise the plugin's module-level
         # imports run before tracing begins and are reported as missed.
         run: |
-          uv run --extra=dev --python=${{ matrix.python-version }} coverage run -m pytest -s -vvv tests/
-          uv run --extra=dev --python=${{ matrix.python-version }} coverage report
+          uv run --group=dev --python=${{ matrix.python-version }} coverage run -m pytest -s -vvv tests/
+          uv run --group=dev --python=${{ matrix.python-version }} coverage report
 
   completion-ci:
     needs: build

@@ -1191,7 +1191,7 @@ dependencies = [
     { name = "pytest" },
 ]
 
-[package.optional-dependencies]
+[package.dev-dependencies]
 dev = [
     { name = "actionlint-py" },
     { name = "check-manifest" },
@@ -1226,37 +1226,42 @@ release = [
 
 [package.metadata]
 requires-dist = [
-    { name = "actionlint-py", marker = "extra == 'dev'", specifier = "==1.7.12.24" },
     { name = "beartype", specifier = ">=0.18" },
-    { name = "check-manifest", marker = "extra == 'dev'", specifier = "==0.51" },
-    { name = "check-wheel-contents", marker = "extra == 'release'", specifier = "==0.6.3" },
-    { name = "deptry", marker = "extra == 'dev'", specifier = "==0.25.1" },
-    { name = "interrogate", marker = "extra == 'dev'", specifier = "==1.7.0" },
-    { name = "mypy", extras = ["faster-cache"], marker = "extra == 'dev'", specifier = "==2.3.1" },
-    { name = "mypy-strict-kwargs", marker = "extra == 'dev'", specifier = "==2026.8.25.1" },
-    { name = "no-defaults", marker = "extra == 'dev'", specifier = "==2026.9.1" },
-    { name = "prek", marker = "extra == 'dev'", specifier = "==0.5.2" },
-    { name = "pylint", marker = "extra == 'dev'", specifier = "==4.0.8" },
-    { name = "pylint-per-file-ignores", marker = "extra == 'dev'", specifier = "==3.2.1" },
-    { name = "pyproject-fmt", marker = "extra == 'dev'", specifier = "==2.29.3" },
-    { name = "pyrefly", marker = "extra == 'dev'", specifier = "==1.2.0" },
-    { name = "pyright", marker = "extra == 'dev'", specifier = "==1.1.411" },
-    { name = "pyroma", marker = "extra == 'dev'", specifier = "==5.0.1" },
     { name = "pytest", git = "https://github.com/pytest-dev/pytest.git?rev=fd90f701b3356998fc0562a1fae3c52afcf8e0dc" },
-    { name = "pytest-cov", marker = "extra == 'dev'", specifier = "==7.1.0" },
-    { name = "ruff", marker = "extra == 'dev'", specifier = "==0.16.6" },
-    { name = "shellcheck-py", marker = "extra == 'dev'", specifier = "==0.11.0.1" },
-    { name = "shfmt-py", marker = "extra == 'dev'", specifier = "==4.1.0" },
-    { name = "strict-kwargs", marker = "extra == 'dev'", specifier = "==2026.8.28.post2" },
-    { name = "towncrier", marker = "extra == 'dev'", specifier = "==26.9.0" },
-    { name = "towncrier", marker = "extra == 'release'", specifier = "==26.9.0" },
-    { name = "ty", marker = "extra == 'dev'", specifier = "==0.0.78" },
-    { name = "vale", marker = "extra == 'dev'", specifier = "==3.20.0.0" },
-    { name = "vulture", marker = "extra == 'dev'", specifier = "==2.16" },
-    { name = "yamlfix", marker = "extra == 'dev'", specifier = "==1.19.1" },
-    { name = "zizmor", marker = "extra == 'dev'", specifier = "==1.30.0" },
 ]
-provides-extras = ["dev", "release"]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "actionlint-py", specifier = "==1.7.12.24" },
+    { name = "check-manifest", specifier = "==0.51" },
+    { name = "deptry", specifier = "==0.25.1" },
+    { name = "interrogate", specifier = "==1.7.0" },
+    { name = "mypy", extras = ["faster-cache"], specifier = "==2.3.1" },
+    { name = "mypy-strict-kwargs", specifier = "==2026.8.25.1" },
+    { name = "no-defaults", specifier = "==2026.9.1" },
+    { name = "prek", specifier = "==0.5.2" },
+    { name = "pylint", specifier = "==4.0.8" },
+    { name = "pylint-per-file-ignores", specifier = "==3.2.1" },
+    { name = "pyproject-fmt", specifier = "==2.29.3" },
+    { name = "pyrefly", specifier = "==1.2.0" },
+    { name = "pyright", specifier = "==1.1.411" },
+    { name = "pyroma", specifier = "==5.0.1" },
+    { name = "pytest-cov", specifier = "==7.1.0" },
+    { name = "ruff", specifier = "==0.16.6" },
+    { name = "shellcheck-py", specifier = "==0.11.0.1" },
+    { name = "shfmt-py", specifier = "==4.1.0" },
+    { name = "strict-kwargs", specifier = "==2026.8.28.post2" },
+    { name = "towncrier", specifier = "==26.9.0" },
+    { name = "ty", specifier = "==0.0.78" },
+    { name = "vale", specifier = "==3.20.0.0" },
+    { name = "vulture", specifier = "==2.16" },
+    { name = "yamlfix", specifier = "==1.19.1" },
+    { name = "zizmor", specifier = "==1.30.0" },
+]
+release = [
+    { name = "check-wheel-contents", specifier = "==0.6.3" },
+    { name = "towncrier", specifier = "==26.9.0" },
+]
 
 [[package]]
 name = "pytest-cov"
