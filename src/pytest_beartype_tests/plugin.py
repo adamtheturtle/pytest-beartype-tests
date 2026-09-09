@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-import types
+from functools import wraps
 from typing import TYPE_CHECKING
 
 import pytest
@@ -11,6 +11,19 @@ from beartype import beartype
 if TYPE_CHECKING:
     from collections.abc import Callable
     from types import ModuleType
+
+
+def _beartyped_proxy(
+    *, function: Callable[..., object]
+) -> Callable[..., object]:
+    """Decorate a proxy without mutating ``function`` metadata."""
+
+    @wraps(wrapped=function)
+    def proxy(*args: object, **kwargs: object) -> object:
+        """Call the original test function."""
+        return function(*args, **kwargs)
+
+    return beartype(obj=proxy)
 
 
 def pytest_collection_modifyitems(items: list[pytest.Item]) -> None:
@@ -27,26 +40,11 @@ def pytest_collection_modifyitems(items: list[pytest.Item]) -> None:
         key = (item.module, item.cls, item.originalname)
         if key not in cache:
             underlying = item.obj
-            # Bound methods proxy ``__annotate__`` to their underlying
-            # function but do not allow assignment, so write through to
-            # ``__func__`` for class-based tests.
-            annotate_target = (
-                underlying.__func__
-                if isinstance(underlying, types.MethodType)
-                else underlying
+            # Beartype mutates the function metadata it decorates. Decorate a
+            # metadata-preserving proxy so the collected function keeps its
+            # original deferred annotations for later introspection and
+            # nested re-collection.
+            cache[key] = _beartyped_proxy(
+                function=underlying,
             )
-            # Snapshot ``__annotate__`` before applying beartype: beartype
-            # replaces it with a closure that crashes under
-            # ``annotationlib.Format.STRING`` (beartype/beartype#637),
-            # which breaks anything that later introspects the original
-            # function's annotations in string form -- notably nested
-            # ``pytest.main()`` re-collection of parametrized tests.
-            saved_annotate = getattr(annotate_target, "__annotate__", None)  # pylint: disable=bad-builtin
-            cache[key] = beartype(obj=underlying)
-            # B010 ordinarily prefers ``x.attr = ...`` over
-            # ``setattr(x, "attr", ...)``, but ``__annotate__`` is a
-            # Python 3.14+ attribute (PEP 749) not modelled by mypy or
-            # pyright stubs on older versions; ``setattr`` bypasses the
-            # static attribute check uniformly.
-            setattr(annotate_target, "__annotate__", saved_annotate)  # noqa: B010  # pylint: disable=bad-builtin
         item.obj = cache[key]
