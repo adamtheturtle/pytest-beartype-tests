@@ -41,7 +41,7 @@ entry-points.pytest11.pytest_beartype_tests = "pytest_beartype_tests.plugin"
 
 [dependency-groups]
 dev = [
-    "actionlint-py==1.7.12.24",
+    "actionlint-py==1.7.12.25",
     "check-manifest==0.51",
     "deptry==0.25.1",
     "interrogate==1.7.0",
